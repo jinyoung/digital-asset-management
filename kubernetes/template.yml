@@ -1,0 +1,228 @@
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: User management and access control
+  labels:
+    app: User management and access control
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: User management and access control
+  template:
+    metadata:
+      labels:
+        app: User management and access control
+    spec:
+      containers:
+        - name: User management and access control
+          image: username/User management and access control:latest
+          ports:
+            - containerPort: 8080
+          readinessProbe:
+            httpGet:
+              path: '/actuator/health'
+              port: 8080
+            initialDelaySeconds: 10
+            timeoutSeconds: 2
+            periodSeconds: 5
+            failureThreshold: 10
+          livenessProbe:
+            httpGet:
+              path: '/actuator/health'
+              port: 8080
+            initialDelaySeconds: 120
+            timeoutSeconds: 2
+            periodSeconds: 5
+            failureThreshold: 5
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: Upload and storage infrastructure
+  labels:
+    app: Upload and storage infrastructure
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: Upload and storage infrastructure
+  template:
+    metadata:
+      labels:
+        app: Upload and storage infrastructure
+    spec:
+      containers:
+        - name: Upload and storage infrastructure
+          image: username/Upload and storage infrastructure:latest
+          ports:
+            - containerPort: 8080
+          readinessProbe:
+            httpGet:
+              path: '/actuator/health'
+              port: 8080
+            initialDelaySeconds: 10
+            timeoutSeconds: 2
+            periodSeconds: 5
+            failureThreshold: 10
+          livenessProbe:
+            httpGet:
+              path: '/actuator/health'
+              port: 8080
+            initialDelaySeconds: 120
+            timeoutSeconds: 2
+            periodSeconds: 5
+            failureThreshold: 5
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: Search and retrieval functionality
+  labels:
+    app: Search and retrieval functionality
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: Search and retrieval functionality
+  template:
+    metadata:
+      labels:
+        app: Search and retrieval functionality
+    spec:
+      containers:
+        - name: Search and retrieval functionality
+          image: username/Search and retrieval functionality:latest
+          ports:
+            - containerPort: 8080
+          readinessProbe:
+            httpGet:
+              path: '/actuator/health'
+              port: 8080
+            initialDelaySeconds: 10
+            timeoutSeconds: 2
+            periodSeconds: 5
+            failureThreshold: 10
+          livenessProbe:
+            httpGet:
+              path: '/actuator/health'
+              port: 8080
+            initialDelaySeconds: 120
+            timeoutSeconds: 2
+            periodSeconds: 5
+            failureThreshold: 5
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: Collaboration and workflow management
+  labels:
+    app: Collaboration and workflow management
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: Collaboration and workflow management
+  template:
+    metadata:
+      labels:
+        app: Collaboration and workflow management
+    spec:
+      containers:
+        - name: Collaboration and workflow management
+          image: username/Collaboration and workflow management:latest
+          ports:
+            - containerPort: 8080
+          readinessProbe:
+            httpGet:
+              path: '/actuator/health'
+              port: 8080
+            initialDelaySeconds: 10
+            timeoutSeconds: 2
+            periodSeconds: 5
+            failureThreshold: 10
+          livenessProbe:
+            httpGet:
+              path: '/actuator/health'
+              port: 8080
+            initialDelaySeconds: 120
+            timeoutSeconds: 2
+            periodSeconds: 5
+            failureThreshold: 5
+
+
+---
+
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: User management and access control
+  labels:
+    app: User management and access control
+spec:
+  ports:
+    - port: 8080
+      targetPort: 8080
+  selector:
+    app: User management and access control
+
+
+---
+
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: Upload and storage infrastructure
+  labels:
+    app: Upload and storage infrastructure
+spec:
+  ports:
+    - port: 8080
+      targetPort: 8080
+  selector:
+    app: Upload and storage infrastructure
+
+
+---
+
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: Search and retrieval functionality
+  labels:
+    app: Search and retrieval functionality
+spec:
+  ports:
+    - port: 8080
+      targetPort: 8080
+  selector:
+    app: Search and retrieval functionality
+
+
+---
+
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: Collaboration and workflow management
+  labels:
+    app: Collaboration and workflow management
+spec:
+  ports:
+    - port: 8080
+      targetPort: 8080
+  selector:
+    app: Collaboration and workflow management
+

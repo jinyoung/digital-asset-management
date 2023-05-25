@@ -1,0 +1,82 @@
+server:
+  port: 8088
+
+---
+
+spring:
+  profiles: default
+  cloud:
+    gateway:
+      routes:
+        - id: User management and access control
+          uri: http://localhost:8082
+          predicates:
+            - Path=/users/**, 
+        - id: Upload and storage infrastructure
+          uri: http://localhost:8083
+          predicates:
+            - Path=/assets/**, 
+        - id: Search and retrieval functionality
+          uri: http://localhost:8085
+          predicates:
+            - Path=/searches/**, 
+        - id: Collaboration and workflow management
+          uri: http://localhost:8088
+          predicates:
+            - Path=/collaborations/**, 
+        - id: frontend
+          uri: http://localhost:8080
+          predicates:
+            - Path=/**
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins:
+              - "*"
+            allowedMethods:
+              - "*"
+            allowedHeaders:
+              - "*"
+            allowCredentials: true
+
+
+---
+
+spring:
+  profiles: docker
+  cloud:
+    gateway:
+      routes:
+        - id: User management and access control
+          uri: http://userManagementAndAccessControl:8080
+          predicates:
+            - Path=/users/**, 
+        - id: Upload and storage infrastructure
+          uri: http://uploadAndStorageInfrastructure:8080
+          predicates:
+            - Path=/assets/**, 
+        - id: Search and retrieval functionality
+          uri: http://searchAndRetrievalFunctionality:8080
+          predicates:
+            - Path=/searches/**, 
+        - id: Collaboration and workflow management
+          uri: http://collaborationAndWorkflowManagement:8080
+          predicates:
+            - Path=/collaborations/**, 
+        - id: frontend
+          uri: http://frontend:8080
+          predicates:
+            - Path=/**
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins:
+              - "*"
+            allowedMethods:
+              - "*"
+            allowedHeaders:
+              - "*"
+            allowCredentials: true
+
+server:
+  port: 8080
